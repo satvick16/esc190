@@ -8,10 +8,10 @@ double split_bill(double base_amount, double tax_rate, double tip_rate, int num_
     double total = base_amount;
     total *= (1 + tax_rate);
     total *= (1 + tip_rate);
+    total = roundf(total * 100) / 100;
 
     double split = total / num_people;
-
-    // rounding?
+    split = roundf(split * 100) / 100;
 
     return split;
 }
