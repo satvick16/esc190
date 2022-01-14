@@ -2,6 +2,7 @@
 #include <math.h>
 #include <ctype.h>
 #include <string.h>
+#include "lab1.h"
 
 double split_bill(double base_amount, double tax_rate, double tip_rate, int num_people)
 {
@@ -40,14 +41,7 @@ int sandy_eats(char menu_item[])
     char *ptr3 = strstr(menu_item, "l");
     char *ptr4 = strstr(menu_item, "fish");
 
-    if (ptr1 || ptr2 || ptr3 || ptr4)
-    {
-        return 0;
-    }
-    else
-    {
-        return 1;
-    }
+    return !(ptr1 || ptr2 || ptr3 || ptr4);
 }
 
 void imagine_fish(char thing[])
