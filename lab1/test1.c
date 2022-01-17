@@ -4,7 +4,7 @@
 int main()
 {
     // testing part 1
-    double test_p1 = split_bill(50.01, 0.13, 0.15, 2);
+    double test_p1 = split_bill(1.30, 0.00, 0.00, 8);
     printf("The split will be: $%.2f\n", test_p1);
 
     // testing part 2
@@ -12,7 +12,7 @@ int main()
     printf("The adjusted price is: $%.2f\n", test_p2);
 
     // testing part 3
-    char test_food[] = "Three Cheese Pizza";
+    char test_food[] = "rhinocerous";
     int test_p3 = sandy_eats(test_food);
     if (test_p3 == 0)
     {
