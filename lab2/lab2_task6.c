@@ -15,5 +15,7 @@ int main()
 
     p = &ptr;
 
+    free(ptr);
+
     return 0;
 }

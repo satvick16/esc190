@@ -13,10 +13,7 @@ int main()
     x[2] = 9;
 
     printf("Addresses of x 0: %p, 1: %p, 2: %p\n", x, x + 1, x + 2);
-
     printf("Values of x through dereferencing 0: %d, 1: %d, 2: %d\n", *x, *(x + 1), *(x + 2));
-
     printf("Values of x through indexing 0: %d, 1: %d, 2: %d\n", x[0], x[1], x[2]);
-
     printf("Indexing out of range: %d\n", x[3]);
 }
