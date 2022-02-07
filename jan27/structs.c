@@ -2,7 +2,7 @@
 
 struct pricetag
 {
-    double price = 0.99;
+    double price;
     double sale_price;
     char item_name[100];
 };
