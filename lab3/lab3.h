@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct party_node{
-	char* item; // name of the party item
-	double price; // price of the item
-	char* ta; // name of TA requesting the item
-	struct party_node *next; //pointer to the next node
+struct party_node
+{
+	char *item;				 // name of the party item
+	double price;			 // price of the item
+	char *ta;				 // name of TA requesting the item
+	struct party_node *next; // pointer to the next node
 };
 
 int add_request(struct party_node **head, char *item, double price, char *ta);
