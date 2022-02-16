@@ -11,12 +11,14 @@ int add_request(struct party_node **head, char *item, double price, char *ta)
     struct party_node *new_node = (struct party_node *)malloc(sizeof(struct party_node));
 
     new_node->item = (char *)malloc(strlen(item) + 1);
-    new_node->item = item;
+    // new_node->item = item;
+    strcpy(new_node->item, item);
 
     new_node->price = price;
 
     new_node->ta = (char *)malloc(strlen(ta) + 1);
-    new_node->ta = ta;
+    // new_node->ta = ta;
+    strcpy(new_node->ta, ta);
 
     new_node->next = *head;
     *head = new_node;
@@ -34,13 +36,15 @@ void remove_request(struct party_node **head)
 
     struct party_node *temp = *head;
     *head = temp->next;
+
+    free(temp->item);
+    free(temp->ta);
     free(temp);
 }
 
 // Sort party item requests - in place?
 void make_sorted(struct party_node **head)
 {
-    // get length of linked list
     int len = 0;
     struct party_node *temp = *head;
 
@@ -56,9 +60,7 @@ void make_sorted(struct party_node **head)
 
     for (int i = 0; i <= len; i++)
     {
-        // TODO: fix this loop
-        // len - i - 1?
-        while (temp->next != NULL)
+        for (int j = 0; j < len - i - 1; j++)
         {
             if (temp->price < temp->next->price)
             {
@@ -68,6 +70,7 @@ void make_sorted(struct party_node **head)
                     temp->next = temp->next->next;
                     mem->next = temp;
                     *head = mem;
+                    prev = mem;
                 }
                 else
                 {
@@ -75,6 +78,7 @@ void make_sorted(struct party_node **head)
                     prev->next = temp->next;
                     temp->next = temp->next->next;
                     mem->next = temp;
+                    prev = mem;
                 }
             }
             else
@@ -91,10 +95,41 @@ void make_sorted(struct party_node **head)
 // Trim list to fit the budget
 double finalize_list(struct party_node **head, double budget)
 {
-    struct party_node *temp = *head;
-    double cost = 0.0;
+    struct party_node *curr = *head;
+    struct party_node *prev = NULL;
+    double leftover = budget;
 
-    // TODO
+    while (curr != NULL)
+    {
+        if (curr->price <= leftover)
+        {
+            leftover -= curr->price;
+            prev = curr;
+            curr = curr->next;
+        }
+        else
+        {
+            if (prev == NULL)
+            {
+                free(curr->item);
+                free(curr->ta);
+                struct party_node *temp = curr->next;
+                free(curr);
+                curr = temp;
+                *head = temp;
+            }
+            else
+            {
+                prev->next = curr->next;
+                free(curr->item);
+                free(curr->ta);
+                free(curr);
+                curr = prev->next;
+            }
+        }
+    }
+
+    return leftover;
 }
 
 // Print the current list - hope this is helpful!
