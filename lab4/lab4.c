@@ -1,4 +1,4 @@
-#include "lab4.h"
+#include "lab3.h"
 
 Player *create_player(char name[], char id[])
 {
